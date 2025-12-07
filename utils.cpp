@@ -20,29 +20,32 @@ int getHeightCard()
 }
 
 // Find the corners and the area of the biggest contour
-std::pair<std::vector<cv::Point>, double> biggestContour(const std::vector<std::vector<cv::Point>> &contours)
+std::vector<cv::Point> biggestContour(const std::vector<std::vector<cv::Point>> &contours)
 {
-    std::vector<cv::Point> biggest;
-    double maxArea = 0.0;
-
-    for (const auto &contour : contours)
+    int max_contour_idx = -1;
+    double max_area = 0;
+    for (int i = 0; i < contours.size(); i++)
     {
-        double area = cv::contourArea(contour);
-
-        if (area > 5000)
+        double area = cv::contourArea(contours[i]);
+        if (area > max_area)
         {
-            double perimeter = cv::arcLength(contour, true);
-            std::vector<cv::Point> approx;
-            cv::approxPolyDP(contour, approx, 0.02 * perimeter, true);
-
-            if (area > maxArea && approx.size() == 4)
-            {
-                biggest = approx;
-                maxArea = area;
-            }
+            max_area = area;
+            max_contour_idx = i;
         }
     }
-    return std::make_pair(biggest, maxArea);
+
+    std::vector<cv::Point> card_contour;
+    if (max_contour_idx >= 0 && max_contour_idx < contours.size())
+    {
+        double epsilon = 0.02 * cv::arcLength(contours[max_contour_idx], true);
+        cv::approxPolyDP(contours[max_contour_idx], card_contour, epsilon, true);
+    }
+    else
+    {
+        std::cerr << "No contours detected" << std::endl;
+        card_contour = std::vector<cv::Point>();
+    }
+    return card_contour;
 }
 
 std::pair<std::vector<int>, std::vector<int>> sortVals(const std::vector<int> &arr)
@@ -158,7 +161,7 @@ std::vector<cv::Point> reorderCorners(std::vector<cv::Point> corners)
 
 void drawRectangle(cv::Mat &image, const std::vector<cv::Point> &corners)
 {
-    int thickness = 20;
+    int thickness = 10;
     cv::line(image, corners[0], corners[1], cv::Scalar(0, 255, 0), thickness); // Top edge
     cv::line(image, corners[0], corners[2], cv::Scalar(0, 255, 0), thickness); // Left edge
     cv::line(image, corners[1], corners[3], cv::Scalar(0, 255, 0), thickness); // Right edge
@@ -208,16 +211,16 @@ cv::Mat displayImage(const std::vector<std::vector<cv::Mat>> &imgArr)
         }
     }
 
-    std::vector<cv::Mat> horizontalStacks(rows);
+    std::vector<cv::Mat> row(rows);
 
     for (int i = 0; i < rows; ++i)
     {
         std::vector<cv::Mat> rowImages = processedImgArr[i];
-        cv::hconcat(rowImages, horizontalStacks[i]);
+        cv::hconcat(rowImages, row[i]);
     }
 
-    cv::Mat stacked;
-    cv::vconcat(horizontalStacks, stacked);
+    cv::Mat grid;
+    cv::vconcat(row, grid);
 
-    return stacked;
+    return grid;
 }

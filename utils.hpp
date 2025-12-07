@@ -10,7 +10,7 @@ int getWidthCard();
 int getHeightCard();
 
 // Find the biggest contour
-std::pair<std::vector<cv::Point>, double> biggestContour(const std::vector<std::vector<cv::Point>> &contours);
+std::vector<cv::Point> biggestContour(const std::vector<std::vector<cv::Point>> &contours);
 
 // Reorder corners to [topLeft, topRight, bottomLeft, bottomRight]
 std::vector<cv::Point> reorderCorners(std::vector<cv::Point> corners);
