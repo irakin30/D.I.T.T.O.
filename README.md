@@ -95,7 +95,7 @@ Very lastly we filter out lines that are of bigger than a certain area size.
 > A lot of this remains unimplemented but here are some images of the progress 
 > we have made 
 
-![Caption](images/README_ASSETS/) 
+![Caption](images/README_ASSETS/incomplete.png) 
 
 ## References
 - https://github.com/NolanAmblard/Pokemon-Card-Scanner/tree/main 
