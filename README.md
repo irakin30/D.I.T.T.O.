@@ -63,7 +63,7 @@ In order to actually `TAG` the card, we do have to get a clean image of the card
 itself. We initially set a standard card resolution of 330 by 440 pixels. 
 
 So from the original image we create: 
-- A greyscale image (we use this as a base as this is a lot easier to work with). 
+- A greyscale image (we use this as a base as this is easier to work with). 
 - A blurred image (with gaussian to reduce noise) 
 - An edged image (image that determines the edges) 
 - A Warped image (the corrected image of the card).
@@ -74,18 +74,28 @@ So from the original image we create:
 
 ## Thresholding and Finding Deformities 
 
-> [!Warning] 
+> [!WARNING] 
 > This is currently in progress and will be done with some refactoring of the
 > code. As of right now, the methodology stays the same. 
 
 So, after we get the fixed image of just the card, we attempt to find major
 deformities within the card, such as scratches, bends, dents, and fraying. 
-This is done by blurring the image with a Gulssian mask. Next we find the gradient magnitude for edge 
-detection. From this we will threshold the Gradient Magnitude with **n** percentile of max threshold.
+This is done by blurring the image with a Gulssian mask. Next we find the 
+gradient magnitude for edge detection. From this we will threshold the Gradient Magnitude with **n** percentile of max threshold.
+
 Afterwards we filter filter out large areas within as these usually present the pokeballs, edges or giant text
-Lastly we set a hough transform threshold to find detect lines with certain amount of votes. 
+
+Lastly we set a hough transform threshold to find detect lines with certain 
+amount of votes. 
+
 Very lastly we filter out lines that are of bigger than a certain area size. 
 
+
+> [!CAUTION] 
+> A lot of this remains unimplemented but here are some images of the progress 
+> we have made 
+
+![Caption](images/README_ASSETS/) 
 
 ## References
 - https://github.com/NolanAmblard/Pokemon-Card-Scanner/tree/main 
