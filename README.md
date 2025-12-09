@@ -62,11 +62,29 @@ accessible hardware) and fine tune it to an acceptable level?
 In order to actually `TAG` the card, we do have to get a clean image of the card
 itself. We initially set a standard card resolution of 330 by 440 pixels. 
 
-[SAM.png]
+So from the original image we create: 
+- A greyscale image (we use this as a base as this is a lot easier to work with). 
+- A blurred image (with gaussian to reduce noise) 
+- An edged image (image that determines the edges) 
+- A Warped image (the corrected image of the card).
 
-Top (in order):    resizedImg, gray, blurred
 
-Bottom (in order): edges, cornersImg, warpedImg
+![Warped Image](images/README_ASSETS/Warped.png) 
+
+## Thresholding and Finding Deformities 
+
+> [!Warning] 
+> This is currently in progress and will be done with some refactoring of the
+> code. As of right now, the methodology stays the same. 
+
+So, after we get the fixed image of just the card, we attempt to find major
+deformities within the card, such as scratches, bends, dents, and fraying. 
+This is done by blurring the image with a Gulssian mask. Next we find the gradient magnitude for edge 
+detection. From this we will threshold the Gradient Magnitude with **n** percentile of max threshold.
+Afterwards we filter filter out large areas within as these usually present the pokeballs, edges or giant text
+
+
+
 ## References
 - https://github.com/NolanAmblard/Pokemon-Card-Scanner/tree/main 
 - https://github.com/hj3yoo/mtg_card_detector 
