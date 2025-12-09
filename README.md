@@ -1,8 +1,45 @@
 # DITTO - Digital Image Tagging and Trading-Card Observer 
 
-[Insert Ditto image Here]
+[Assets/Ditto.png]
 
 ### Group Members: Sam Lin, Devin Chen, Istab Rakin 
+
+> [!WARNING] 
+> This project is currently a work in progress and thus many features are either
+> in an incomplete or broken state.  
+
+## Build Instructions 
+
+> [!IMPORTANT] 
+> This project depends on OpenCV and that library must be installed on your
+> computer to compile this project 
+
+### Dependencies
+```sh
+Cmake
+Make 
+OpenCV # Must be accessible to CMAKE
+``` 
+ 
+### Compiling 
+
+In the main directory (the directory with the CMakelists.txt) run: 
+
+```sh
+cmake . # creates a makefile for the project
+make 
+```
+
+This would then output the binary `DITTO` which can then be run.
+
+### Running the project 
+> [!NOTE] 
+> 
+> 
+
+```sh 
+./DITTO <input_image> <template_image>
+```
 
 ## Short Introduction 
 Ditto is inspired by TAG grading. It is a trading card evaluation company that 
@@ -20,8 +57,16 @@ would be a proof-of-concept for now (can we make a tagging system using easily
 accessible hardware) and fine tune it to an acceptable level? 
 
 
+## Detecting the Card
 
+In order to actually `TAG` the card, we do have to get a clean image of the card
+itself. We initially set a standard card resolution of 330 by 440 pixels. 
 
+[SAM.png]
+
+Top (in order):    resizedImg, gray, blurred
+
+Bottom (in order): edges, cornersImg, warpedImg
 ## References
 - https://github.com/NolanAmblard/Pokemon-Card-Scanner/tree/main 
 - https://github.com/hj3yoo/mtg_card_detector 
