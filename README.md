@@ -1,6 +1,6 @@
 # DITTO - Digital Image Tagging and Trading-Card Observer 
 
-[Assets/Ditto.png]
+![Yippee!](images/README_ASSETS/ditto.jpg)
 
 ### Group Members: Sam Lin, Devin Chen, Istab Rakin 
 
@@ -68,8 +68,9 @@ So from the original image we create:
 - An edged image (image that determines the edges) 
 - A Warped image (the corrected image of the card).
 
+![Greyscale Image, Edges, Warped Image](images/README_ASSETS/preview.png)
 
-![Warped Image](images/README_ASSETS/Warped.png) 
+![Warped (and corrected) Image](images/README_ASSETS/warp.png) 
 
 ## Thresholding and Finding Deformities 
 
@@ -82,7 +83,8 @@ deformities within the card, such as scratches, bends, dents, and fraying.
 This is done by blurring the image with a Gulssian mask. Next we find the gradient magnitude for edge 
 detection. From this we will threshold the Gradient Magnitude with **n** percentile of max threshold.
 Afterwards we filter filter out large areas within as these usually present the pokeballs, edges or giant text
-
+Lastly we set a hough transform threshold to find detect lines with certain amount of votes. 
+Very lastly we filter out lines that are of bigger than a certain area size. 
 
 
 ## References
