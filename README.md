@@ -34,7 +34,12 @@ This would then output the binary `DITTO` which can then be run.
 
 ### Running the project 
 > [!NOTE] 
+> `input_image` is the image used to grade 
 > 
+> template_image is used as a placeholder, but still needs to be implemented, 
+> thus just use the same image twice as 
+> 
+> `./DITTO input_image input_image`
 > 
 
 ```sh 
@@ -95,7 +100,7 @@ Very lastly we filter out lines that are of bigger than a certain area size.
 > A lot of this remains unimplemented but here are some images of the progress 
 > we have made 
 
-![Caption](images/README_ASSETS/incomplete.png) 
+![Incomlpete Bend Detection](images/README_ASSETS/incomplete.png) 
 
 ## References
 - https://github.com/NolanAmblard/Pokemon-Card-Scanner/tree/main 
